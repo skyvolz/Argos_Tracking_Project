@@ -27,6 +27,7 @@ headerline = f.readline()
 #Read contents of one line
 lineString = f.readline()
 
+<<<<<<< HEAD
 #Loop through all the lines
 while lineString != "":
      
@@ -45,10 +46,27 @@ while lineString != "":
     tag_id = line_data[-3]     # Tag identifier ("tag-local-identifier")
     
     #Evaluate latitude and longitude conditions
+=======
+#Pretend we read one line of data from the file
+lineString = line_list[15]
+>>>>>>> parent of 21631b6 (process all lines in the file using a for loop)
 
-    lat_condition = the_box['y_min'] < lat < the_box['y_max']
-    lon_condition = the_box['x_min'] < lon < the_box['x_max']
+# Use the split command to parse the items in lineString into a list object
+line_data = lineString.split(',')
+  
+# Assign variables to specfic items in the list
+event_id = line_data[0]   # Argos tracking event ID ("event-id")
+timestamp = line_data[2]  # Observation date ("timestamp")
+lat = float(line_data[4])        # Observation latitude  ("location-lat")
+lon = float(line_data[3])        # Observation longitude ("location-lon")
+lc  = line_data[14]        # Observation location class ("argos:lc")
+tag_id = line_data[-3]     # Tag identifier ("tag-local-identifier")
+  
+#Evaluate latitude and longitude conditions
+lat_condition = the_box['y_min'] < lat < the_box['y_max']
+lon_condition = the_box['x_min'] < lon < the_box['x_max']
 
+<<<<<<< HEAD
     #Report the status of the points
     if lat_condition & lon_condition:
         print(f'Record {event_id}: {tag_id} was IN the box at {timestamp}')
@@ -60,3 +78,10 @@ while lineString != "":
 
 #Close the file
 f.close()
+=======
+#Report the status of the points
+if lat_condition & lon_condition:
+    print(f'Record {event_id}: {tag_id} was IN the box at {timestamp}')
+else:
+    print(f'Record {event_id}: {tag_id} was NOT IN the box at {timestamp}')
+>>>>>>> parent of 21631b6 (process all lines in the file using a for loop)
